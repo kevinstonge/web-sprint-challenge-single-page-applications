@@ -5,6 +5,7 @@ import {
   Route,
   NavLink,
   Switch,
+  Redirect,
 } from "react-router-dom";
 import Cta from "./Cta";
 import Form from "./Form";
@@ -13,6 +14,10 @@ import "./App.scss";
 const App = () => {
   const [formVisible, setFormVisible] = useState(false); //modal form with state true/false for visibility
   const [order, setOrder] = useState([]); //ordered items added to array
+  const [orderPlaced, setOrderPlaced] = useState({
+    orderPlaced: false,
+    orderDetails: {},
+  });
   const addToOrder = (item) => {
     setOrder([...order, item]); //add item to order
   };
@@ -21,7 +26,9 @@ const App = () => {
     axios
       .post("https://reqres.in/api/users", order)
       .then((r) => {
-        console.log(r);
+        console.log("order placed successfully");
+        setOrderPlaced({ orderPlaced: true, orderDetails: r.data });
+        setOrder([]);
       })
       .catch((e) => console.log(e)); //send order to server
   };
@@ -40,23 +47,40 @@ const App = () => {
         </div>
         <nav>
           <NavLink
+            to="/pizza"
+            onClick={() => setFormVisible(true)}
+            data-cy="pizzaRouteButton"
+          >
+            /pizza
+          </NavLink>
+          <NavLink
             to="/cart"
             onClick={() => setFormVisible(false)}
             data-cy="cartButton"
           >
-            cart [{order.length}]
+            cart [{order.length === 0 ? "empty" : order.length}]
           </NavLink>
         </nav>
       </header>
       {formVisible ? (
-        <Form setFormVisible={setFormVisible} addToOrder={addToOrder} />
+        <Form
+          setFormVisible={setFormVisible}
+          addToOrder={addToOrder}
+          order={order}
+        />
       ) : null}
+      {orderPlaced.orderPlaced ? <Redirect to="/success" /> : null}
+      {order.length > 0 ? <Redirect to="/cart" /> : null}
       <Switch>
         <Route exact path="/">
           <Cta setFormVisible={setFormVisible} />
         </Route>
         <Route path="/pizza">
           <Cta setFormVisible={setFormVisible} />
+        </Route>
+        <Route path="/success">
+          <h3>Thank you for your order!</h3>
+          <p>{JSON.stringify(orderPlaced.orderDetails)}</p>
         </Route>
         <Route path="/cart">
           {order.length > 0 ? (
