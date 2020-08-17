@@ -1,0 +1,21 @@
+$bg1: #222;
+$bg2: #444;
+$bg3: #666;
+$fg1: #bbb;
+$fg2: #ddd;
+$fg3: #fff;
+$em1: #b22;
+$em2: #b2b;
+$em3: #4b4;
+@mixin flexR {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+@mixin flexC {
+  @include flexR();
+  flex-direction: column;
+  justify-content: center;
+}

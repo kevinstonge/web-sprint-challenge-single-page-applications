@@ -1,0 +1,47 @@
+@import "base";
+body {
+  text-align: center;
+  background-color: $bg1;
+  color: $fg1;
+  header {
+    background-color: $bg2;
+    font-size: 2rem;
+    padding: 0.5rem;
+    color: red;
+    @include flexR();
+    nav {
+      @include flexR();
+      a {
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: $fg1;
+        padding: 0.2rem 0.5rem;
+        margin: 0.5rem;
+        background-color: $bg3;
+        &:hover {
+          background-color: $fg1;
+          color: $bg1;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .ctaContainer {
+    background-color: $em1;
+    padding: 1rem;
+    .ctaButton {
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1.5rem;
+      background-color: $em1;
+      color: $bg1;
+      border: 0.1rem solid $bg1;
+      border-radius: 0.5rem;
+      &:hover {
+        background-color: $bg1;
+        color: $em1;
+        cursor: pointer;
+      }
+    }
+  }
+}
