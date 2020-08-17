@@ -1,5 +1,9 @@
 @import "base";
 body {
+  a {
+    text-decoration: none;
+    color: $em1;
+  }
   text-align: center;
   background-color: $bg1;
   color: $fg1;
@@ -7,7 +11,7 @@ body {
     background-color: $bg2;
     font-size: 2rem;
     padding: 0.5rem;
-    color: red;
+    color: $em1;
     @include flexR();
     nav {
       @include flexR();
@@ -43,5 +47,20 @@ body {
         cursor: pointer;
       }
     }
+  }
+  .cartHeading {
+    padding: 1rem 0;
+    font-size: 1.2rem;
+    background-color: $em1;
+    color: $bg1;
+  }
+  ol {
+    list-style: decimal;
+  }
+  .orderItem {
+    list-style-position: inside;
+    margin: 0.5rem auto;
+    background-color: $bg2;
+    color: $fg2;
   }
 }

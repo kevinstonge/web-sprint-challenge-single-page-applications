@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch,
+} from "react-router-dom";
+import Cta from "./Cta";
+import Form from "./Form";
 import "./App.scss";
 
 const App = () => {
@@ -16,25 +23,78 @@ const App = () => {
       .then((r) => console.log(r))
       .catch((e) => console.log(e)); //send order to server
   };
+  useEffect(() => {
+    if (window.location.pathname === "/pizza") {
+      setFormVisible(true);
+    }
+  }, []);
   return (
     <Router>
       <header>
         <div>
-          <h1>Lambda Eats</h1>
+          <NavLink to="/">
+            <h1>Lambda Eats</h1>
+          </NavLink>
         </div>
         <nav>
-          <Link to="/cart" onClick={() => setFormVisible(false)}>
+          <NavLink to="/cart" onClick={() => setFormVisible(false)}>
             cart [{order.length}]
-          </Link>
+          </NavLink>
         </nav>
       </header>
-
+      {formVisible ? (
+        <Form setFormVisible={setFormVisible} addToOrder={addToOrder} />
+      ) : null}
       <Switch>
         <Route exact path="/">
-          <div className="ctaContainer">
-            <h2>hungry? click the button below to order pizza!</h2>
-            <button className="ctaButton">order pizza!</button>
-          </div>
+          <Cta setFormVisible={setFormVisible} />
+        </Route>
+        <Route path="/pizza">
+          <Cta setFormVisible={setFormVisible} />
+        </Route>
+        <Route path="/cart">
+          {order.length > 0 ? (
+            <>
+              <h2 className="cartHeading">
+                Review your order, {order[0].name}
+              </h2>
+              <ol>
+                {order.map((item, index) => {
+                  let toppings = Object.keys(item).map((k) =>
+                    k.includes("tp_") && item[k] === true ? k.substr(3) : null
+                  );
+                  const toppingsString =
+                    toppings.filter(Boolean).length > 0
+                      ? `with ${toppings.filter(Boolean).join(", ")}`
+                      : "no toppings";
+                  return (
+                    <li key={`item-${index}`} className="orderItem">
+                      {item.size} pizza {toppingsString}
+                    </li>
+                  );
+                })}
+              </ol>
+              <button
+                className="addItemButton"
+                onClick={() => setFormVisible(true)}
+              >
+                add something else to this order
+              </button>
+              <button className="placeOrderButton" onClick={() => placeOrder()}>
+                feed me now!
+              </button>
+            </>
+          ) : (
+            <>
+              <h2 className="cartHeading">You have no items in your cart</h2>
+              <button
+                className="addItemButton"
+                onClick={() => setFormVisible(true)}
+              >
+                add something!
+              </button>
+            </>
+          )}
         </Route>
       </Switch>
     </Router>

@@ -1,0 +1,36 @@
+@import "base";
+.formContainer {
+  position: fixed;
+  top: 4rem;
+  left: 50%;
+  max-width: 90vw;
+  transform: translateX(-50%);
+  background-color: $bg2;
+  .formHeader {
+    background-color: $em1;
+    border-bottom: 1px solid $bg1;
+    @include flexR();
+    #closeButton {
+      padding: 0.1rem;
+      margin: 0.2rem;
+      border: 1px solid $bg1;
+      &:hover {
+        background-color: $bg1;
+        cursor: pointer;
+      }
+    }
+  }
+  .formBody {
+    padding: 1rem;
+
+    .formItem {
+      @include flexC();
+      align-items: flex-start;
+    }
+    .formItems {
+      @include flexR();
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}
