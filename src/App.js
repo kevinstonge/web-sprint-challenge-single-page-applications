@@ -20,7 +20,9 @@ const App = () => {
     console.log(order);
     axios
       .post("https://reqres.in/api/users", order)
-      .then((r) => console.log(r))
+      .then((r) => {
+        console.log(r);
+      })
       .catch((e) => console.log(e)); //send order to server
   };
   useEffect(() => {
@@ -67,13 +69,18 @@ const App = () => {
                   let toppings = Object.keys(item).map((k) =>
                     k.includes("tp_") && item[k] === true ? k.substr(3) : null
                   );
+                  let instructions =
+                    item.specialInstructions.length > 0
+                      ? ` (special instructions: ${item.specialInstructions})`
+                      : null;
                   const toppingsString =
                     toppings.filter(Boolean).length > 0
                       ? `with ${toppings.filter(Boolean).join(", ")}`
                       : "no toppings";
                   return (
                     <li key={`item-${index}`} className="orderItem">
-                      {item.size} pizza {toppingsString}
+                      one {item.size} pizza {toppingsString}
+                      {instructions}.
                     </li>
                   );
                 })}
@@ -85,7 +92,7 @@ const App = () => {
                 add something else to this order
               </button>
               <button className="placeOrderButton" onClick={() => placeOrder()}>
-                feed me now!
+                place order now!
               </button>
             </>
           ) : (

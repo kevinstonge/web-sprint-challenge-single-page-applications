@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
 import "./Form.scss";
+import { Redirect } from "react-router-dom";
 const schema = yup.object().shape({
   name: yup
     .string()
@@ -23,6 +24,7 @@ function Form(props) {
   const onSubmit = (data) => {
     props.addToOrder(data);
     props.setFormVisible(false);
+    return <Redirect to="/cart" />;
   };
   return (
     <div className="formContainer">
