@@ -45,14 +45,14 @@ function Form(props) {
               type="text"
               id="name"
               name="name"
-              cy-data="name"
+              data-cy="name"
               ref={register}
             ></input>
             <p className="error">{errors.name?.message}</p>
           </div>
           <div className="formItem">
             <label htmlFor="size">pizza size:</label>
-            <select id="size" name="size" cy-data="size" ref={register}>
+            <select id="size" name="size" data-cy="size" ref={register}>
               <option name="--size--">--size--</option>
               <option name="small">small</option>
               <option name="medium">medium</option>
@@ -70,7 +70,7 @@ function Form(props) {
                       type="checkbox"
                       name={`tp_${topping}`}
                       id={`tp_${topping}`}
-                      cy-name={`tp_${topping}`}
+                      data-cy={`tp_${topping}`}
                       ref={register}
                     />
                     {topping}
@@ -86,11 +86,13 @@ function Form(props) {
             <textarea
               id="specialInstructions"
               name="specialInstructions"
-              cy-data="specialInstructions"
+              data-cy="specialInstructions"
               ref={register}
             />
           </div>
-          <button type="submit">add to order</button>
+          <button type="submit" data-cy="addToOrderButton">
+            add to order
+          </button>
         </form>
       </div>
     </div>

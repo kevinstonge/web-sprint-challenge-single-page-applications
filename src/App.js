@@ -37,7 +37,11 @@ const App = () => {
           </NavLink>
         </div>
         <nav>
-          <NavLink to="/cart" onClick={() => setFormVisible(false)}>
+          <NavLink
+            to="/cart"
+            onClick={() => setFormVisible(false)}
+            data-cy="cartButton"
+          >
             cart [{order.length}]
           </NavLink>
         </nav>
