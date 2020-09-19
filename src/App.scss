@@ -1,0 +1,96 @@
+@import "base";
+body {
+  a {
+    text-decoration: none;
+    color: $em1;
+  }
+  text-align: center;
+  background-color: $bg1;
+  color: $fg1;
+  #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    justify-items: stretch;
+  }
+  header {
+    background-color: $bg2;
+    font-size: 2rem;
+    padding: 0.5rem;
+    color: $em1;
+    @include flexR();
+    nav {
+      @include flexR();
+      a {
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: $fg1;
+        padding: 0.2rem 0.5rem;
+        margin: 0.5rem;
+        background-color: $bg3;
+        &:hover {
+          background-color: $fg1;
+          color: $bg1;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .ctaContainer {
+    background-image: url("./Pizza.jpg");
+    background-size: cover;
+
+    padding: 5rem;
+    h2 {
+      color: $em1;
+      font-size: 1.8rem;
+      font-weight: bolder;
+      -webkit-text-stroke: 1px $bg1;
+      text-shadow: 0.1rem 0.1rem 0.1rem $bg1;
+    }
+    .ctaButton {
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1.5rem;
+      background-color: $em1;
+      color: $bg1;
+      border: 0.1rem solid $bg1;
+      border-radius: 0.5rem;
+      &:hover {
+        background-color: $bg1;
+        color: $em1;
+        cursor: pointer;
+      }
+    }
+  }
+  .cartHeading {
+    padding: 1rem 0;
+    font-size: 1.2rem;
+    background-color: $em1;
+    color: $bg1;
+  }
+  ol {
+    list-style: decimal;
+  }
+  .orderItem {
+    list-style-position: inside;
+    margin: 0.5rem auto;
+    background-color: $bg2;
+    color: $fg2;
+  }
+  .addItemButton,
+  .placeOrderButton {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color: $bg2;
+    color: $fg1;
+    border: 1px solid $bg2;
+  }
+  .addItemButton:hover,
+  .placeOrderButton:hover {
+    background-color: $fg1;
+    color: $bg1;
+    cursor: pointer;
+  }
+}
